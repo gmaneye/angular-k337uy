@@ -1,0 +1,74 @@
+<tui-root>
+  <span class="tui-text_h3">Broken example</span>
+  <div><tui-toggle [(ngModel)]="moreColumns"></tui-toggle> Show less columns</div>
+  <table tuiTable [columns]="columns">
+    <thead tuiThead>
+      <tr tuiThGroup>
+        <th *tuiHead="'a'" tuiTh>1</th>
+        <th *tuiHead="'b'" tuiTh>2</th>
+        <th *tuiHead="'c'" tuiTh>3</th>
+      </tr>
+    </thead>
+    <tbody [data]="data" tuiTbody>
+      <ng-container *ngFor="let item of data"> 
+        <tr tuiTr>
+          <td tuiTd *tuiCell="'a'" [attr.rowspan]="item.subitems.length">
+            1
+          </td>
+          <td tuiTd *tuiCell="'b'" [attr.rowspan]="item.subitems.length">
+            2
+          </td>
+          <ng-container *ngIf="item.subitems.length > 0">
+            <td tuiTd *tuiCell="'c'">3</td> 
+          </ng-container>
+        </tr>
+        <ng-container *ngFor="let subitems of item.subitems; let subindex = index">
+        <tr  tuiTr *ngIf="subindex != 0">
+            <td tuiTd *tuiCell="'c'">3</td>     
+        </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+  <span class="tui-text_h3">Correct example</span>
+  <table class="tui-table">
+    <thead>
+      <tr class="tui-table__tr">
+        <th class="tui-table__th">
+          1
+        </th>
+        <th class="tui-table__th">
+          2
+        </th>
+        <th class="tui-table__th">
+          3
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="tui-table__tr">
+        <td class="tui-table__td" rowspan="2">1</td>
+        <td class="tui-table__td" rowspan="2">2</td>
+        <td>3.1</td>
+      </tr>
+      <tr class="tui-table__tr">
+        <td>3.2</td>
+      </tr>
+      
+      <tr class="tui-table__tr">
+      <td class="tui-table__td" rowspan="4">1</td>
+      <td class="tui-table__td" rowspan="4">2</td>
+    </tr>
+    <tr class="tui-table__tr">
+      <td>3.1</td>
+    </tr>
+    <tr class="tui-table__tr">
+      <td>3.2</td>
+    </tr>
+    
+    <tr class="tui-table__tr">
+    <td>3.3</td>
+  </tr>
+    </tbody>
+  </table>
+</tui-root>
